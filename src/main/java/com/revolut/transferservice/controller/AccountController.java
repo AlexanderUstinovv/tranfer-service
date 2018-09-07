@@ -10,6 +10,7 @@ import com.revolut.transferservice.exception.NotFoundException;
 import com.revolut.transferservice.dao.AccountDao;
 import com.revolut.transferservice.dao.TransferAccountDao;
 import com.revolut.transferservice.service.TransferAccountService;
+import com.revolut.transferservice.utils.resolver.AccountTemplateResolver;
 import spark.Request;
 import spark.Response;
 
@@ -47,7 +48,7 @@ public class AccountController {
     }
 
     private TransferAccountService getTransferAccountService() {
-        AccountDao accountDao = new TransferAccountDao();
+        AccountDao accountDao = new TransferAccountDao(new AccountTemplateResolver());
         return new TransferAccountService(accountDao);
     }
 
