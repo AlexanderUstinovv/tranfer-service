@@ -2,14 +2,10 @@ package com.revolut.transferservice.dao;
 
 import com.revolut.transferservice.data.QueryExecutor;
 import com.revolut.transferservice.model.Account;
-import com.revolut.transferservice.utils.TemplateLoader;
 import com.revolut.transferservice.utils.resolver.TemplateResolver;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
