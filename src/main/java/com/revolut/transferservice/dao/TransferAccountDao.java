@@ -1,5 +1,6 @@
 package com.revolut.transferservice.dao;
 
+import com.revolut.transferservice.data.QueryExecutor;
 import com.revolut.transferservice.model.Account;
 import com.revolut.transferservice.utils.TemplateLoader;
 import org.apache.velocity.Template;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class TransferAccountDao extends AbstractRepository implements AccountDao {
+public class TransferAccountDao extends QueryExecutor implements AccountDao {
 
     public Optional<Account> findById(long id) {
         Template template = TemplateLoader.getTemplate(readAccountTemplate);

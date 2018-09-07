@@ -2,7 +2,7 @@ package com.revolut.transferservice;
 
 import com.google.gson.Gson;
 import com.revolut.transferservice.config.ApplicationProperties;
-import com.revolut.transferservice.config.DerbyDataSource;
+import com.revolut.transferservice.data.DerbyDataSource;
 import com.revolut.transferservice.controller.AccountController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

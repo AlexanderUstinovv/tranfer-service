@@ -1,5 +1,6 @@
-package com.revolut.transferservice.config;
+package com.revolut.transferservice.data;
 
+import com.revolut.transferservice.config.ApplicationProperties;
 import com.revolut.transferservice.utils.TemplateLoader;
 import org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource;
 import org.apache.velocity.Template;

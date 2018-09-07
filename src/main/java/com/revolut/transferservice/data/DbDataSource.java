@@ -1,4 +1,4 @@
-package com.revolut.transferservice.config;
+package com.revolut.transferservice.data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
