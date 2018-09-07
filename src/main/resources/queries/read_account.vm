@@ -1,0 +1,1 @@
+select id, balance from account where ID = $idNumber
