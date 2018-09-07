@@ -7,8 +7,8 @@ import com.revolut.transferservice.controller.response.ResponseStatus;
 import com.revolut.transferservice.exception.BadRequest;
 import com.revolut.transferservice.exception.InsufficientFunds;
 import com.revolut.transferservice.exception.NotFoundException;
-import com.revolut.transferservice.repository.AccountRepository;
-import com.revolut.transferservice.repository.TransferAccountRepository;
+import com.revolut.transferservice.dao.AccountDao;
+import com.revolut.transferservice.dao.TransferAccountDao;
 import com.revolut.transferservice.service.TransferAccountService;
 import spark.Request;
 import spark.Response;
@@ -47,8 +47,8 @@ public class AccountController {
     }
 
     private TransferAccountService getTransferAccountService() {
-        AccountRepository accountRepository = new TransferAccountRepository();
-        return new TransferAccountService(accountRepository);
+        AccountDao accountDao = new TransferAccountDao();
+        return new TransferAccountService(accountDao);
     }
 
     private boolean isValidRequest(TransferRequest transferRequest) {

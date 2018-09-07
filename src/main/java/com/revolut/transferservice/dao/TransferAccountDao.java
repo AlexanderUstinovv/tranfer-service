@@ -1,4 +1,4 @@
-package com.revolut.transferservice.repository;
+package com.revolut.transferservice.dao;
 
 import com.revolut.transferservice.model.Account;
 import com.revolut.transferservice.utils.TemplateLoader;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class TransferAccountRepository extends AbstractRepository implements AccountRepository {
+public class TransferAccountDao extends AbstractRepository implements AccountDao {
 
     public Optional<Account> findById(long id) {
         Template template = TemplateLoader.getTemplate(readAccountTemplate);
@@ -60,7 +60,7 @@ public class TransferAccountRepository extends AbstractRepository implements Acc
         return stringWriter.toString();
     }
 
-    private final Logger logger = LoggerFactory.getLogger(TransferAccountRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(TransferAccountDao.class);
     private final String readAccountTemplate = "queries/read_account.vm";
     private final String updateAccountTemplate = "queries/update_account.vm";
 }

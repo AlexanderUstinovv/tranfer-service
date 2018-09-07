@@ -3,14 +3,14 @@ package com.revolut.transferservice.service;
 import com.revolut.transferservice.exception.InsufficientFunds;
 import com.revolut.transferservice.exception.NotFoundException;
 import com.revolut.transferservice.model.Account;
-import com.revolut.transferservice.repository.AccountRepository;
+import com.revolut.transferservice.dao.AccountDao;
 
 import java.util.Optional;
 
 public class TransferAccountService implements AccountService {
 
-    public TransferAccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public TransferAccountService(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @Override
@@ -21,17 +21,17 @@ public class TransferAccountService implements AccountService {
         if (accountFrom.getBalance() - amount >= 0) {
             accountFrom.setBalance(accountFrom.getBalance() - amount);
             accountTo.setBalance(accountTo.getBalance() + amount);
-            accountRepository.update(accountFrom);
-            accountRepository.update(accountTo);
+            accountDao.update(accountFrom);
+            accountDao.update(accountTo);
         } else {
             throw new InsufficientFunds("Insufficient funds on account " + accountFrom.getId());
         }
     }
 
     private Account getAccountById(long id) throws NotFoundException {
-        Optional<Account> accountOptional = accountRepository.findById(id);
+        Optional<Account> accountOptional = accountDao.findById(id);
         return accountOptional.orElseThrow(() -> new NotFoundException("Account " + id + " doesn't exist"));
     }
 
-    private AccountRepository accountRepository;
+    private AccountDao accountDao;
 }

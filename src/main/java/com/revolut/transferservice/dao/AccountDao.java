@@ -1,10 +1,10 @@
-package com.revolut.transferservice.repository;
+package com.revolut.transferservice.dao;
 
 import com.revolut.transferservice.model.Account;
 
 import java.util.Optional;
 
-public interface AccountRepository {
+public interface AccountDao {
     Optional<Account> findById(long id);
     void update(Account account);
 }
