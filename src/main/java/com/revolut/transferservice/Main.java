@@ -20,7 +20,7 @@ public class Main {
         configure();
 
         path("/api", () -> {
-            post(Routes.TRANSFER.url(), "application/json", (req, res) ->
+            post("/transfer", "application/json", (req, res) ->
                     new AccountController(getTransferAccountService()).transfer(req, res), gson::toJson);
         });
 
