@@ -7,15 +7,16 @@ import com.revolut.transferservice.controller.response.ResponseStatus;
 import com.revolut.transferservice.exception.BadRequest;
 import com.revolut.transferservice.exception.InsufficientFunds;
 import com.revolut.transferservice.exception.NotFoundException;
-import com.revolut.transferservice.dao.AccountDao;
-import com.revolut.transferservice.dao.TransferAccountDao;
 import com.revolut.transferservice.service.TransferAccountService;
-import com.revolut.transferservice.utils.resolver.AccountTemplateResolver;
 import spark.Request;
 import spark.Response;
 
 
 public class AccountController {
+
+    public AccountController(TransferAccountService transferAccountService) {
+        this.transferAccountService = transferAccountService;
+    }
 
     public Object transfer(Request request, Response response) {
 
@@ -28,7 +29,6 @@ public class AccountController {
             if (!isValidRequest(transferRequest)) {
                 throw new BadRequest("Not valid data");
             }
-            TransferAccountService transferAccountService = getTransferAccountService();
             transferAccountService.transfer(transferRequest.getIdFrom(), transferRequest.getIdTo(), transferRequest.getAmount());
             responseObject.setMessage(ResponseStatus.SUCCESS.toString());
             response.status(200);
@@ -47,12 +47,9 @@ public class AccountController {
         return responseObject;
     }
 
-    private TransferAccountService getTransferAccountService() {
-        AccountDao accountDao = new TransferAccountDao(new AccountTemplateResolver());
-        return new TransferAccountService(accountDao);
-    }
-
     private boolean isValidRequest(TransferRequest transferRequest) {
         return  (transferRequest.getIdTo() > 0 && transferRequest.getIdFrom() > 0 && transferRequest.getAmount() > 0);
     }
+
+    private TransferAccountService transferAccountService;
 }
