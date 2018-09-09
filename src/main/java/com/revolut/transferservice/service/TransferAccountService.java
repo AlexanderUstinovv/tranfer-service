@@ -5,6 +5,7 @@ import com.revolut.transferservice.exception.NotFoundException;
 import com.revolut.transferservice.model.Account;
 import com.revolut.transferservice.dao.AccountDao;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class TransferAccountService implements AccountService {
@@ -14,13 +15,13 @@ public class TransferAccountService implements AccountService {
     }
 
     @Override
-    public void transfer(long idFrom, long idTo, double amount) throws NotFoundException {
+    public void transfer(long idFrom, long idTo, BigDecimal amount) throws NotFoundException {
         Account accountFrom = getAccountById(idFrom);
         Account accountTo = getAccountById(idTo);
 
-        if (accountFrom.getBalance() - amount >= 0) {
-            accountFrom.setBalance(accountFrom.getBalance() - amount);
-            accountTo.setBalance(accountTo.getBalance() + amount);
+        if (!accountFrom.getBalance().subtract(amount).equals(BigDecimal.ZERO)) {
+            accountFrom.setBalance(accountFrom.getBalance().subtract(amount));
+            accountTo.setBalance(accountTo.getBalance().add(amount));
             accountDao.update(accountFrom);
             accountDao.update(accountTo);
         } else {

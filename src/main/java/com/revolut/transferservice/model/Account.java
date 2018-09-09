@@ -1,8 +1,10 @@
 package com.revolut.transferservice.model;
 
+import java.math.BigDecimal;
+
 public class Account {
 
-    public Account(long id, double balance) {
+    public Account(long id, BigDecimal balance) {
         this.id = id;
         this.balance = balance;
     }
@@ -15,14 +17,14 @@ public class Account {
         this.id = id;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
     private long id;
-    private double balance;
+    private BigDecimal balance;
 }

@@ -1,11 +1,13 @@
 package com.revolut.transferservice.controller.request;
 
+import java.math.BigDecimal;
+
 public class TransferRequest {
 
     public TransferRequest() {
     }
 
-    public TransferRequest(long idFrom, long idTo, double amount) {
+    public TransferRequest(long idFrom, long idTo, BigDecimal amount) {
         this.idFrom = idFrom;
         this.idTo = idTo;
         this.amount = amount;
@@ -27,15 +29,15 @@ public class TransferRequest {
         this.idTo = idTo;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
     private long idFrom;
     private long idTo;
-    private double amount;
+    private BigDecimal amount;
 }

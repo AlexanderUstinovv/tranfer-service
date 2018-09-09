@@ -29,7 +29,9 @@ public class AccountController {
             if (!isValidRequest(transferRequest)) {
                 throw new BadRequest("Not valid data");
             }
-            transferAccountService.transfer(transferRequest.getIdFrom(), transferRequest.getIdTo(), transferRequest.getAmount());
+            transferAccountService.transfer(
+                    transferRequest.getIdFrom(), transferRequest.getIdTo(), transferRequest.getAmount()
+            );
             responseObject.setMessage(ResponseStatus.SUCCESS.toString());
             response.status(200);
         } catch (BadRequest ex) {
@@ -48,7 +50,9 @@ public class AccountController {
     }
 
     private boolean isValidRequest(TransferRequest transferRequest) {
-        return  (transferRequest.getIdTo() > 0 && transferRequest.getIdFrom() > 0 && transferRequest.getAmount() > 0);
+        return (transferRequest.getIdTo() > 0
+                && transferRequest.getIdFrom() > 0
+                && transferRequest.getAmount().longValue() > 0);
     }
 
     private TransferAccountService transferAccountService;

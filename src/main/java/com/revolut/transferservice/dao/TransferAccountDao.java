@@ -6,6 +6,7 @@ import com.revolut.transferservice.utils.resolver.TemplateResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class TransferAccountDao extends QueryExecutor implements AccountDao {
             List<HashMap<String, Object>> results = executeQuery(sqlQuery);
             if (results.size() > 0) {
                 long resultId = ((Number) results.get(0).get("ID")).longValue();
-                double amount = ((Number) results.get(0).get("BALANCE")).doubleValue();
+                BigDecimal amount = BigDecimal.valueOf(((Number) results.get(0).get("BALANCE")).doubleValue());
                 Account account = new Account(resultId, amount);
                 accountResult = Optional.of(account);
             }
