@@ -65,5 +65,5 @@ public enum DerbyDataSource implements DbDataSource {
     private final Logger logger = LoggerFactory.getLogger(DerbyDataSource.class);
     private final String databaseName = ApplicationProperties.INSTANCE.getValue("database_name");
     private final String databaseAttributes = ApplicationProperties.INSTANCE.getValue("database_attributes");
-    private final String initialScript = "queries/create_account_table.vm";
+    private final String initialScript = ApplicationProperties.INSTANCE.getValue("initial_script");
 }
