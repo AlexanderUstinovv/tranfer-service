@@ -19,7 +19,7 @@ public class TransferAccountService implements AccountService {
         Account accountFrom = getAccountById(idFrom);
         Account accountTo = getAccountById(idTo);
 
-        if (!accountFrom.getBalance().subtract(amount).equals(BigDecimal.ZERO)) {
+        if ((accountFrom.getBalance().subtract(amount)).signum() == 1) {
             accountFrom.setBalance(accountFrom.getBalance().subtract(amount));
             accountTo.setBalance(accountTo.getBalance().add(amount));
             accountDao.update(accountFrom);
